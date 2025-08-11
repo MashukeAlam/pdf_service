@@ -1,0 +1,74 @@
+<div class="container">
+  <h1>Generated PDFs</h1>
+  <div style="margin-bottom: 24px;">
+    <a href="<%= new_pdf_path %>" class="link" style="background: #2563eb; color: #fff; padding: 10px 20px; border-radius: 6px; text-decoration: none;">+ Manual Entry</a>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>PDF Filename</th>
+        <th>Status</th>
+        <th>Download</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @file_records.each do |record| %>
+        <tr id="pdf-row-<%= record.id %>">
+          <td><%= record.name %></td>
+          <td id="status-<%= record.id %>">
+            <% if record.status == 'ready' %>
+              <span class="status-badge" style="background:#10b981; color:#fff; padding:4px 14px; border-radius:16px; font-weight:600; font-size:0.98em;">Ready</span>
+            <% elsif record.status == 'processing' %>
+              <span class="status-badge" style="background:#f59e42; color:#fff; padding:4px 14px; border-radius:16px; font-weight:600; font-size:0.98em;">Processing</span>
+            <% else %>
+              <span class="status-badge" style="background:#ef4444; color:#fff; padding:4px 14px; border-radius:16px; font-weight:600; font-size:0.98em;">Unknown</span>
+            <% end %>
+          </td>
+          <td id="download-<%= record.id %>">
+            <% if record.status == 'ready' && record.document.attached? %>
+              <%= link_to 'Download', rails_blob_path(record.document, disposition: "attachment"), class: 'link', target: '_blank' %>
+            <% else %>
+              Not available
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+</div>
+
+<script>
+  // Poll every 5 seconds for status updates
+  document.addEventListener('DOMContentLoaded', function() {
+    const fileRecords = [
+      <% @file_records.each do |record| %>
+        { id: <%= record.id %>, showUrl: "<%= pdf_path(record, format: :json) %>" },
+      <% end %>
+    ];
+    function updateStatus(record) {
+      fetch(record.showUrl)
+        .then(resp => resp.json())
+        .then(data => {
+          const statusCell = document.getElementById('status-' + record.id);
+          const downloadCell = document.getElementById('download-' + record.id);
+          if (!statusCell || !downloadCell) return;
+          let badge = '';
+          if (data.status === 'ready') {
+            badge = '<span class="status-badge" style="background:#10b981; color:#fff; padding:4px 14px; border-radius:16px; font-weight:600; font-size:0.98em;">Ready</span>';
+            downloadCell.innerHTML = `<a href="${data.url}" class="link" target="_blank">Download</a>`;
+          } else if (data.status === 'processing') {
+            badge = '<span class="status-badge" style="background:#f59e42; color:#fff; padding:4px 14px; border-radius:16px; font-weight:600; font-size:0.98em;">Processing</span>';
+            downloadCell.innerHTML = 'Not available';
+          } else {
+            badge = '<span class="status-badge" style="background:#ef4444; color:#fff; padding:4px 14px; border-radius:16px; font-weight:600; font-size:0.98em;">Unknown</span>';
+            downloadCell.innerHTML = 'Not available';
+          }
+          statusCell.innerHTML = badge;
+        });
+    }
+    setInterval(() => {
+      fileRecords.forEach(updateStatus);
+    }, 5000);
+  });
+</script>
+    </tbody>
+  </table>
+</div>

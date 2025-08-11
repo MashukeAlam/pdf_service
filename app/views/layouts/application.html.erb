@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= content_for(:title) || "Pdf Service" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= yield :head %>
+
+    <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
+    <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
+
+    <link rel="icon" href="/icon.png" type="image/png">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/icon.png">
+
+    <%# Includes all stylesheet files in app/assets/stylesheets %>
+    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body style="margin:0; padding:0;">
+    <!-- Navbar -->
+    <nav style="
+      width: 100%;
+      background: rgba(255,255,255,0.10);
+      box-shadow: 0 2px 12px rgba(37,99,235,0.05);
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 100;
+      backdrop-filter: blur(6px);
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+    ">
+      <div style="
+        width: 100%;
+        max-width: 1200px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 40px;
+        margin: 0 auto;
+      ">
+        <div style="font-size:1.7rem; font-weight:800; color:#2563eb; letter-spacing:-1px; display:flex; align-items:center; gap:8px;">
+          <svg width="32" height="32" fill="none" viewBox="0 0 32 32" style="vertical-align:middle;"><rect width="32" height="32" rx="8" fill="#2563eb"/><path d="M10 22V10h12v12H10zm2-2h8V12h-8v8z" fill="#fff"/></svg>
+          PDF Service
+        </div>
+        <div style="display:flex; gap:20px;">
+          <a href="/" style="color:#2563eb; font-weight:600; text-decoration:none; font-size:1.1rem; transition:color 0.2s;">Home</a>
+          <a href="<%= templates_path %>" style="color:#2563eb; font-weight:600; text-decoration:none; font-size:1.1rem; transition:color 0.2s;">Templates</a>
+          <a href="<%= pdfs_path %>" style="color:#2563eb; font-weight:600; text-decoration:none; font-size:1.1rem; transition:color 0.2s;">PDFs</a>
+          <a href="<%= new_pdf_path %>" style="color:#2563eb; font-weight:600; text-decoration:none; font-size:1.1rem; transition:color 0.2s;">Generate</a>
+        </div>
+      </div>
+    </nav>
+    <!-- End Navbar -->
+    <div style="padding-top:70px; min-height:100vh;">
+      <%= yield %>
+    </div>
+  </body>
+</html>

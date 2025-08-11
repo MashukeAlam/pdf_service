@@ -1,0 +1,19 @@
+<div class="container">
+  <h1>Generate PDF</h1>
+  <%= form_with url: pdfs_path, local: true do |form| %>
+    <div>
+      <%= form.label :template_id, 'Template' %>
+  <%= form.collection_select :template_id, @templates, :id, :name, prompt: 'Select a template', id: 'template_select' %>
+    </div>
+    <div>
+      <%= form.label :data, 'Data (JSON)' %>
+      <%= form.text_area :data, rows: 10, placeholder: '{ "key": "value", "items": [1,2,3] }', id: 'data_textarea' %>
+      <small>Provide JSON matching the template signature.</small>
+    </div>
+    <div>
+      <%= form.submit 'Generate PDF' %>
+    </div>
+  <% end %>
+
+
+</div>

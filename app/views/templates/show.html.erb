@@ -1,0 +1,9 @@
+<div class="container">
+	<h1>Template: <%= @template.name %></h1>
+	<p><strong>Signature:</strong></p>
+	<pre><%= JSON.pretty_generate(@template.signature) rescue @template.signature %></pre>
+	<p><strong>Content (ERB):</strong></p>
+	<pre><%= @template.content %></pre>
+	<%= link_to 'Edit', edit_template_path(@template), class: 'link' %> |
+	<%= link_to 'Back', templates_path, class: 'link' %>
+</div>

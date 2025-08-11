@@ -1,0 +1,8 @@
+# {
+#  "recipient": "Jane Smith",
+#  "course": "Ruby on Rails",
+#  "date": "2025-08-11"
+# }
+
+class Template < ApplicationRecord
+end

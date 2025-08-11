@@ -1,0 +1,24 @@
+<div class="container">
+  <h1>Templates</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @templates.each do |template| %>
+        <tr>
+          <td><%= template.name %></td>
+          <td>
+            <%= link_to 'Show', template, class: 'link' %> |
+            <%= link_to 'Edit', edit_template_path(template), class: 'link' %> |
+            <%= link_to 'Destroy', template, method: :delete, data: { confirm: 'Are you sure?' }, class: 'link' %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= link_to 'New Template', new_template_path, class: 'link' %>
+</div>

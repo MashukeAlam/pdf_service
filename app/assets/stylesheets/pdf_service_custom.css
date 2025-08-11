@@ -1,0 +1,109 @@
+/* PDF Service Custom Styles */
+body {
+  font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+  background: #f7f9fb;
+  color: #222;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 800px;
+  margin: 40px auto;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+  padding: 32px 40px;
+}
+
+h1, h2, h3 {
+  color: #2a4365;
+  margin-bottom: 16px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 24px;
+}
+thead {
+  background: #e2e8f0;
+}
+th, td {
+  padding: 12px 10px;
+  border-bottom: 1px solid #e2e8f0;
+  text-align: left;
+}
+tr:last-child td {
+  border-bottom: none;
+}
+
+form {
+  margin-bottom: 24px;
+}
+form label {
+  font-weight: 500;
+  margin-bottom: 6px;
+  display: block;
+}
+form input[type="text"],
+form textarea,
+form select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  margin-bottom: 16px;
+  font-size: 1rem;
+  background: #f1f5f9;
+}
+form input[type="submit"],
+form button {
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 24px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+form input[type="submit"]:hover,
+form button:hover {
+  background: #1e40af;
+}
+
+pre {
+  background: #f1f5f9;
+  padding: 12px;
+  border-radius: 6px;
+  font-size: 0.97rem;
+  overflow-x: auto;
+}
+
+.notice {
+  background: #d1fae5;
+  color: #065f46;
+  padding: 10px 16px;
+  border-radius: 6px;
+  margin-bottom: 18px;
+  border: 1px solid #10b981;
+}
+
+.alert {
+  background: #fee2e2;
+  color: #991b1b;
+  padding: 10px 16px;
+  border-radius: 6px;
+  margin-bottom: 18px;
+  border: 1px solid #ef4444;
+}
+
+.link {
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 500;
+}
+.link:hover {
+  text-decoration: underline;
+}
